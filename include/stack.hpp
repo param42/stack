@@ -1,68 +1,61 @@
-#ifndef STACK_HPP
-#define STACK_HPP
+#ifndef STACK_STACK_HPP
+#define STACK_STACK_HPP
 
 #include <iostream>
 
 template <typename T>
-class stack
- {
-	public:
-		stack();
-		~stack();
-		
-		auto count() const->size_t;
-		auto push(const T & element) -> void;
-		auto pop() -> void;
-		
-			private:
-				T * _array;
-				size_t _array_size;
-				size_t _count;
-				};
+class stack {
+public:
+
+    stack();
+    ~stack();
+
+    auto count() const noexcept -> size_t ;
+    auto push(T const& value) -> void;
+    auto pop() -> T;
+
+
+private:
+    T * array_;
+    size_t array_size_;
+    size_t count_;
+};
+
 
 template <typename T>
-stack<T>::stack() : _array(nullptr), _array_size(0), _count(0) {}
+stack<T>::stack() : count_(0), array_(nullptr),  array_size_(0) {
+}
 
 template <typename T>
-stack<T>::~stack()
- {
-	delete[] _array;
-	}
+stack<T>::~stack() {
+    delete[] array_;
+}
 
 template <typename T>
-auto stack<T>::count() const->size_t
- {
-	return _count;
-	}
+auto stack<T>::count() const noexcept -> size_t {
+    return count_;
+}
 
 template <typename T>
-auto stack<T>::push(const T & element) -> void
- {
-	if (_count == _array_size)
-		 {
-		_array_size = (_array_size == 0) ? 1 : 2 * _count;
-		
-		auto temp = new T[_count];
-		
-			for (auto i = 0; i < _count; i++)
-			 temp[i] = _array[i];
-		
-			delete[] _array;
-		_array = new T[_array_size];
-		
-			for (auto i = 0; i < _count; i++)
-			 _array[i] = temp[i];
-		
-			delete[] temp;
-		}
-	
-		_array[_count++] = element;
-	}
+auto stack<T>::push(T const& value) -> void {
+    if (count_ == array_size_) {
+        size_t size = array_size_ * 2 + (array_size_ == 0);
+        T * m_array = new T[size];
+        std::copy(array_, array_ + array_size_, m_array);
+        delete[] array_;
+        array_ = m_array;
+        array_size_ = size;
+    }
+    ++count_;
+    array_[count_ - 1] = value;
+}
 
 template <typename T>
-auto stack<T>::pop() -> void
- {
-	_count--;
-	}
+auto stack<T>::pop() -> T{
+    if(count_==0)
+        throw std::logic_error("stack is empty!");
+
+    return array_[--count_];
+}
 
 #endif
