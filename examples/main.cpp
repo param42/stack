@@ -1,20 +1,25 @@
-
 #include "stack.hpp"
-#include <iostream>
 
+int main() {
 
-int main()
- {
-	stack<int> st;
-	std::cout << st.count() << std::endl;
-	st.push(5);
-	st.push(6);
-	st.push(7);
-	std::cout << st.count() << std::endl;
-	st.pop();
-	st.pop();
-	st.pop();
-	std::cout << st.count() << std::endl;
-	
-		return 0;
+    stack<size_t> st;
+
+    try {
+        st.push(1);
+        st.push(2);
+        st.push(3);
+    
+        std::cout << "Size of stack "<< st.count() << std::endl;
+
+        std::cout << st.pop() << std::endl;
+        std::cout << st.pop() << std::endl;
+        std::cout << st.pop() << std::endl;
+    }
+    catch (std::logic_error& e) {
+        std::cerr << e.what() << std::endl;
+    }
+
+    std::cout << "Size of stack after popping elements "<< st.count() << std::endl;
+
+    return 0;
 }
