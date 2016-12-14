@@ -1,58 +1,35 @@
 #include "catch.hpp"
 #include <stack.hpp>
 
-SCENARIO("popping an element from stack => count of elements decreases by one")
+
+SCENARIO("pop() must delete the top element of the stack")
 {
-    GIVEN("stack and its size")
+    GIVEN("Filled stack")
     {
-        stack<size_t > st;
-        st.push(1);
-        st.push(2);
-        auto count = st.count();
-
-        WHEN("pop an element")
+        stack<int> s;
+        s.push(0);
+        s.push(1);
+        s.push(2);
+        WHEN("Calling pop()")
         {
-            st.pop();
-
-            THEN("count of elements decreased by one")
+            s.pop();
+            THEN("pop() must delete value 2 from the top")
             {
-                REQUIRE(st.count() == count - 1);
+                REQUIRE(s.count() == 2);
+                REQUIRE(s.top() == 1);
             }
         }
     }
-}
-
-SCENARIO("popping an element => stack returns the last one")
-{
-    GIVEN("stack")
+    GIVEN("Empty stack")
     {
-        stack<size_t > st;
-        st.push(1);
-        st.push(2);
-
-        WHEN("pop an element")
+        stack<int> s;
+        WHEN("Calling pop()")
         {
-            auto element = st.pop();
-
-            THEN("popped element == 2")
+            s.pop();
+            THEN("pop() must not do anything")
             {
-                REQUIRE(element == 2);
-            }
-        }
-    }
-}
-
-SCENARIO("stack is empty => pop method throws an exception")
-{
-    GIVEN("empty stack")
-    {
-        stack<size_t> st;
-
-        WHEN("trying to pop an element")
-        {
-            THEN("an exception must be thrown")
-            {
-                REQUIRE_THROWS_AS(st.pop(), std::logic_error &);
+                REQUIRE(s.count() == 0);
+                REQUIRE_THROWS_AS(s.top(), std::underflow_error);
             }
         }
     }
