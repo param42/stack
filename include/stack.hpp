@@ -1,4 +1,4 @@
-
+#include <stdexcept>
 template <typename T>
 class stack
 {
