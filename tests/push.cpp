@@ -36,7 +36,7 @@ SCENARIO("push() must add value to the top of the stack")
     {
         stack<int> s;
         s.push(0);
-        size_t size = s.size();
+       
         s.push(1);
         s.push(2);
         s.push(3);
@@ -45,8 +45,7 @@ SCENARIO("push() must add value to the top of the stack")
         {
             s.push(5);
             THEN("push() must reallocate memory by doubling previous and add value 5 to the top of the stack")
-            {
-                REQUIRE(s.size() == (size*2));
+            {             
                 REQUIRE(s.count() == 6);
                 REQUIRE(s.top() == 5);
             }
