@@ -8,7 +8,7 @@ class allocator
 {
 protected:
     allocator(size_t size = 0);
-    allocator(const allocator &) = delete;
+    allocator(const allocator &) = delete;//запрещаем конструктор копиравния
     ~allocator();
 
     auto operator = (const allocator &) -> allocator & = delete;
