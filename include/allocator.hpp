@@ -40,7 +40,7 @@ auto allocator<T>::swap(allocator & other) -> void
 {
     std::swap(_ptr, other._ptr);
     std::swap(_size, other._size);
-   
+    std::swap(count_, other.count_);
 }
 
 template <typename T>
@@ -48,8 +48,10 @@ auto allocator<T>::allocate() -> void
 {
     if (_count == _size)
     {
+    
         auto new_size =2*_count + (_size == 0);
         allocator<T> a(new_size);
+        a.count_=count_;
         std::copy(_ptr, _ptr + _count, a._ptr);
         swap(a);
     }
