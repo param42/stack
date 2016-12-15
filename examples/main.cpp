@@ -1,5 +1,5 @@
 #include "stack.hpp"
-  
+#include <iostream>
  int main() {
  
   
