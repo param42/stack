@@ -50,7 +50,7 @@ auto stack<T>::push(const T& value) /* strong */ -> void
 		catch (...)
 		{
 			delete[] new_array;
-			//array_size_ /= 2;
+			array_size_ /= 2;
 			throw;
 		}
 
@@ -68,7 +68,7 @@ auto stack<T>::push(const T& value) /* strong */ -> void
 		{
 			delete[] array_;
 			array_ = backup;
-			//array_size_ /= 2;
+			array_size_ /= 2;
 		}
 		throw;
 	}
