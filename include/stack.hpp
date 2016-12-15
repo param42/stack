@@ -38,13 +38,16 @@ auto stack<T>::push(const T& value) /* strong */ -> void
 	T* backup = array_;
 	T* new_array = nullptr;
 	bool realloc = false;
+	
+	 size_t size;
+	
 	if (count_ == array_size_)
 	{
-		array_size_ =array_size_*2 + (array_size_==0);
+		size =array_size_*2 + (array_size_==0);
 
 		try
 		{
-			new_array = new T[array_size_];
+			new_array = new T[size];
 			std::copy(array_, array_ + count_, new_array);
 		}
 		catch (...)
@@ -74,6 +77,9 @@ auto stack<T>::push(const T& value) /* strong */ -> void
 	}
 
 	++count_;
+	
+	if(count_ == array_size_) array_size_ = size;
+	
 	if (realloc) delete[] backup;
 	return;
 }
