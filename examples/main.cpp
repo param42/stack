@@ -11,10 +11,6 @@
          st.push(3);
      
          std::cout << "Size of stack "<< st.count() << std::endl;
- 
-         std::cout << st.pop() << std::endl;
-         std::cout << st.pop() << std::endl;
-        std::cout << st.pop() << std::endl;
     }
      catch (std::logic_error& e) {
          std::cerr << e.what() << std::endl;
