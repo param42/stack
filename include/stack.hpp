@@ -40,7 +40,7 @@ auto stack<T>::push(const T& value) /* strong */ -> void
 	bool realloc = false;
 	if (count_ == array_size_)
 	{
-		array_size_ *= 2;
+		array_size_ =array_size_*2 + (array_size_==0);
 
 		try
 		{
