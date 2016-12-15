@@ -29,9 +29,10 @@ allocator<T>::allocator(size_t size)
 }
 
 template <typename T>
-allocator<T>::~allocator()
-{
-    delete [] _ptr;
+allocator<T>::~allocator() {
+    for(int i = 0; i < count_; ++i)
+        ptr_[i].~T();
+    ::operator delete(ptr_);
 }
 
 template <typename T>
