@@ -8,7 +8,7 @@ class allocator
 {
 protected:
     allocator(size_t size = 0);
-    allocator(const allocator &) = delete;//запрещаем конструктор копиравния
+    allocator(const allocator &) = delete;
     ~allocator();
 
     auto operator = (const allocator &) -> allocator & = delete;
@@ -47,8 +47,8 @@ auto allocator<T>::allocate() -> void
 {
     if (_count == _size)
     {
-        auto size = (_size == 0) ? 1 : 2 * _count;
-        allocator<T> a(size);
+        auto new_size =2*_count + (_size == 0);
+        allocator<T> a(new_size);
         std::copy(_ptr, _ptr + _count, a._ptr);
         swap(a);
     }
